@@ -1,6 +1,69 @@
-@startuml Person 
-class Person {
-  name: string
-  age: number
+@startuml travelPlan class diagram 
+class User {
+  name: String 
+  email: string 
+  password: string
+  constructor(name: string, email: string, password:string)
+  addPlan(name: string, budget: number, scene: string)
+  createtravelPlan(name: string, time: date, budget: number)
+  commentPlan(comment: string)
+  recommendPlan(recommend: string)
+  addPhotoPlan(photo: photo)
+  addToWishlist(travelPlan: TravelPlan)
 }
+
+class TravelPlan {
+  name: string 
+  status: string
+  budget: number
+  departurePoint: string
+  transportation: string
+  activities: Activity[]
+  scene: string
+  startDate: date
+  endDate: date
+  comment: string
+  recommendation: boolean
+  photos: photo[]
+  save: boolean 
+  saveAsDraft: boolean 
+
+  constructor(name: string, scene: string, budget: number)
+
+}
+
+class Comment{
+  text: string
+  author: User
+}
+
+class Recommendation {
+  text: string
+}
+
+class Photo {
+  
+}
+
+class Activity {
+  type: string
+  time: date
+  location: string
+}
+
+class PackingThing {
+  name: string
+  status: boolean
+
+}
+
+User "1" o---> "0-50" TravelPlan : add, remove, create, save, saveAsDraft
+TravelPlan --> Activity : add, remove, create
+TravelPlan --> PackingThing : add, remove
+TravelPlan --> Comment : addComment
+TravelPlan --> Recommendation : addRecommendation
+TravelPlan --> Photo : add, remove
+User --> Comment : add, remove
+User ---> Recommendation
+
 @enduml

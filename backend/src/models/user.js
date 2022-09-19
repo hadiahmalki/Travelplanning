@@ -1,41 +1,43 @@
-const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
-
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    unique: true,
-    required: true,
-  },
-  age: {
-    type: Number,
-    required: true,
-  },
-  bio: String,
-  createdAt: {
-    type: Date,
-    default: new Date(),
-  },
-})
+const PackingThing = require('./packing-things')
+const TravelPlan = require('./plan')
+// const Activity = require('./activity')
 
 class User {
-  greet(person) {
-    console.log(`Hello ${person.name}, this is ${this.name}`)
+  constructor(name, email) {
+    this.name = name
+    this.email = email
+    this.plans = []
+    this.comments = []
   }
 
-  get profile() {
-    return `
-# ${this.name} (${this.age})
-Bio: ${this.bio}
-    `
+  greet(user) {
+    console.log(`Hello ${user.name},this is ${this.name}`)
   }
 
-  set profile(newValue) {
-    throw new Error(`profile is only a getter. You can't override it with ${newValue}.`)
+  createPlan(name, budget, startDate, endDate, scene, status, departurePoint, transportation) {
+    const newPlan = new TravelPlan(name, budget, startDate, endDate, scene, status, departurePoint, transportation)
+
+    this.plans.push(newPlan)
+
+    return newPlan
+  }
+
+  addPlan(plan) {
+    this.plans.push(plan)
+  }
+
+  savePlan(plan) {
+    plan.savePlan(this)
+    this.plans = this.plans.filter(p => p === plan)
+  }
+
+  addPackingThing(plan, name, status) {
+    const packingThings = new PackingThing(name, status, this)
+    plan.packingThings.push(packingThings)
+  }
+
+  leaveComment(plan, text) {
+    this.comments.push(text)
   }
 }
-
-userSchema.loadClass(User)
-userSchema.plugin(autopopulate)
-
-module.exports = mongoose.model('User', userSchema)
+module.exports = User

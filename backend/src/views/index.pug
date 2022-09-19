@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to New Adventure
+
+  each User in welcome 
+    ul
+      li=User.name
+    a(href="/planform")="New plan"
+    

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  <body>
+     <form action="/addplan" method="POST">
+       <p>
+         label(for='name')   name: <input type="text" name="name" value="" placeholder="Enter Your plan name"/>
+         label(for='budget')   budget: <input type="text" name="budget" value="" placeholder="Enter Budget" />
+         label(for='scene')   scene: <input type="text" name="scene" value="" placeholder="Enter Your favorite scene "/>
+         label(for='status')   status: <input type="text" name="status" value="" placeholder="Enter Your status "/>
+         label(for='start date')   startDate: <input type="text" name="startDate" value="" placeholder="Enter starting date "/>
+         label(for='end date')   endDate: <input type="text" name="endDate" value="" placeholder="Enter ending date "/>
+         label(for='departurePoint')   departurePoint: <input type="text" name="departurePoint" value="" placeholder="Enter Your departure point "/>
+         label(for='transportation')   transportation: <input type="text" name="transportation" value="" placeholder="Enter transportation "/>
+       </p>
+       <input type="submit" value="Submit"/>
+     </form>
+  </body>

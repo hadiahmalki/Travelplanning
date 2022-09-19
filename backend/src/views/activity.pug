@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  <body>
+     <form action="/addactivity" method="POST">
+       <p>
+         label(for='name')   name: <input type="text" name="name" value="" placeholder="Enter Your plan name"/>
+         label(for='duration')   duration: <input type="text" name="duration" value="" placeholder="Enter duration" />
+         label(for='date')   date: <input type="text" name="date" value="" placeholder="Enter date "/>
+         label(for='location')   location: <input type="text" name="location" value="" placeholder="Enter location "/>
+       </p>
+       <input type="submit" value="Submit"/>
+     </form>
+  </body>
