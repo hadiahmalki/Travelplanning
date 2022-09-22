@@ -1,4 +1,4 @@
-const User = require('./user')
+const User = require('./users')
 // const TravelPlan = require('./plan')
 // const Activity = require('./activity')
 // const packingThing = require('./packing-things')
