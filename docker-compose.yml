@@ -24,7 +24,7 @@ services:
       context: backend
       dockerfile: dev.Dockerfile
     environment:
-      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongodb
+      - MONGODB_CONNECTION_STRING=mongodb+srv://Hadiah:greatlife13579@clustertravel.acgnixv.mongodb.net/aventura?retryWrites=true&w=majority
     labels:
       - traefik.enable=true
       - traefik.http.routers.backend.rule=(Host(`aventura.localhost`) && PathPrefix(`/api`))

@@ -1,25 +1,39 @@
-class TravelPlan {
-  transportation = []
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
-  activities = []
+const planSchema = new mongoose.Schema({
+  name: String,
+  budget: Number,
+  startDate: Date,
+  endDate: Date,
+  scene: String,
+  status: String,
+  transportation: String,
+  departurePoint: String,
+  likedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      autopopulate: true,
+    },
+  ],
+  activities: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Activity',
+      autopopulate: true,
+    },
+  ],
+})
 
-  comments = []
-
-  packingThings = []
-
-  constructor(name, budget, startDate, endDate, scene, status, departurePoint) {
-    this.name = name
-    this.budget = budget
-    this.startDate = startDate
-    this.endDate = endDate
-    this.scene = scene
-    this.status = status
-    this.departurePoint = departurePoint
+class Plan {
+  async addActivities(activity) {
+    // const activities = new Activity(name, location, time)
+    this.activities.push(activity)
+    await this.save()
   }
-
-  /* addActivities(plan, location, name, time) {
-		const activities = new Activity(name, location, time)
-		this.plan.activities.push(activities)
-	} */
 }
-module.exports = TravelPlan
+planSchema.loadClass(Plan)
+
+planSchema.plugin(autopopulate)
+module.exports = mongoose.model('Plan', planSchema)

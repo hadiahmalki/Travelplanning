@@ -3,7 +3,7 @@ import axios from 'axios'
 import UserCard from '@/components/user-card.vue'
 
 export default {
-  name: 'Home-page',
+  name: 'UserList',
   components: {
     // eslint-disable-next-line vue/no-unused-components
     UserCard,
@@ -15,7 +15,7 @@ export default {
     }
   },
   async created() {
-    const usersRequest = await axios.get('http://localhost:4444/api/users')
+    const usersRequest = await axios.get('http://localhost:4444/api/user')
     this.users = usersRequest.data
   },
 }
@@ -23,5 +23,6 @@ export default {
 <template lang="pug">
 .home 
 p The time is: {{ time.toDateString() }}
-UserCard(v-for="user in users" :user="user")
+div(v-for="user in users")
+  router-link(:to="`/user/${user._id}`") {{user.name}}
 </template>

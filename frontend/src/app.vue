@@ -1,13 +1,19 @@
-<script setup>
+<script>
+import axios from 'axios'
 import { RouterLink, RouterView } from 'vue-router'
+export default {
+  name: 'App',
+  async created() {
+    console.log((await axios.get('/api/account/session')).data)
+  },
+}
 </script>
 
 <template lang="pug">
 #app
   h1 AVENTURA
 #nav
-    RouterLink(to="/")| Home page |&nbsp;
-    RouterLink(to="/about") About us
+    RouterLink(to="/")| Users List
 RouterView 
 </template>
 

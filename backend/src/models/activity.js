@@ -1,11 +1,12 @@
-class Activity {
-	constructor(name, duration, date, location) {
-		this.name = name
-		this.duration = duration
-		this.date = date
-		this.location = location
-	}
-}
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
+
+const activitySchema = new mongoose.Schema({
+  name: String,
+  duration: Number,
+  date: Date,
+  location: String,
+})
 
 /* const ActivitiesName = {
 	Name: 'name',
@@ -17,4 +18,4 @@ const ActivitiesLocation = {
 	location: 'location',
 } */
 
-module.exports = Activity
+module.exports = mongoose.model('Activity', activitySchema)
